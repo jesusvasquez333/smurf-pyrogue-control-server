@@ -9,7 +9,7 @@ RUN git submodule sync && git submodule update --init --recursive
 ENV PYTHONPATH /usr/local/src/smurf-pcie/software/python:${PYTHONPATH}
 ENV PYTHONPATH /usr/local/src/smurf-pcie/firmware/submodules/axi-pcie-core/python:${PYTHONPATH}
 
-# Install pyrogue-control-server (version R1.3.0)
+# Install pyrogue-control-server (version R1.4.0)
 WORKDIR /usr/local/src
 RUN git clone https://github.com/slaclab/pyrogue-control-server.git -b R1.4.0
 WORKDIR pyrogue-control-server
