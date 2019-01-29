@@ -4,13 +4,13 @@
 
 This docker image, named **smurf-pyrogue-control-server** contains pyrogue-control-server for the SMuRF project.
 
-It is based on the smurf-rogue docker image, and contains Rogue (using the smurf's `cryo-det` branch), python 3, EPICS 3.15.5 (the community version), and other necessary packages and tools.
+It is based on the smurf-rogue docker image, which contains Rogue (using the smurf's `cryo-det` branch), python 3, EPICS 3.15.5 (the community version), and other necessary packages and tools.
 
 ## Source code
 
 The base image is smurf-rogue, which contains the smurf version of rogue and all additional tools.
 
-The pyrogue-control-server source code is checked out for directly from its [github repository](https://github.com/slaclab/pyrogue-control-server), using the latest stable version **R1.3.0**.
+The pyrogue-control-server source code is checked out directly from its [github repository](https://github.com/slaclab/pyrogue-control-server), using the latest stable version **R1.3.0**.
 
 ## Building the image
 
@@ -48,6 +48,7 @@ docker run -ti \
 -v "/tmp/.X11-unix:/tmp/.X11-unix" \
 -v "/etc/group:/etc/group:ro" \
 -v "/etc/passwd:/etc/passwd:ro" \
+--device /dev/datadev_0 \
 -v <APP_DIR>:/python \
 -e SERVER_ARGS="-t /python/<PYROGUE_TARBAL_NAME> <OTHER_CONTROL_SERVER_ARGS>" \
 jesusvasquez333/smurf-pyrogue-control-server:<TAG>
@@ -71,6 +72,7 @@ docker run -ti --rm \
 -e DISPLAY=$DISPLAY \
 -v $XAUTH:$XAUTH \
 -e XAUTHORITY=$XAUTH \
+--device /dev/datadev_0 \
 -v <APP_DIR>:/python \
 -e SERVER_ARGS="-t /python/<PYROGUE_TARBAL_NAME> <OTHER_CONTROL_SERVER_ARGS>" \
 jesusvasquez333/smurf-pyrogue-control-server:<TAG>
@@ -82,6 +84,7 @@ $ cat run_docker.sh
 #!/usr/bin/env bash
 
 docker run -ti --rm \
+--device /dev/datadev_0 \
 -v <APP_DIR>:/python \
 -e SERVER_ARGS="-t /python/<PYROGUE_TARBAL_NAME> -s <OTHER_CONTROL_SERVER_ARGS>" \
 jesusvasquez333/smurf-pyrogue-control-server:<TAG>
